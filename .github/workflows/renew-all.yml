@@ -1,0 +1,66 @@
+name: renew all
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+
+  renew:
+    runs-on: ubuntu-latest
+    env:
+      EXTRA_STR: _some
+    strategy:
+      fail-fast: true
+      matrix:
+        deploydir:
+          - preset-lede
+          - preset-openwrt
+          - preset-immortalwrt
+          - preset-lienol-openwrt
+          - preset-x-wrt
+    steps:
+
+    - uses: actions/checkout@v4
+      with:
+        path: ${{ env.EXTRA_STR }}
+
+    - name: Carry out
+      env:
+        RENEW_PY: ${{ env.EXTRA_STR }}/extra-files/renew.py
+        DEPLOY_DIR: ${{ env.EXTRA_STR }}/${{ matrix.deploydir }}
+      run: |
+        dot_config_array=(1.config 2.config)
+        if [ "$DEPLOY_DIR" = "$EXTRA_STR/preset-openwrt" ]; then
+          dot_config_array+=(multi-common.config multi-mini.config)
+        fi
+        for dc in "${dot_config_array[@]}"; do
+          export DOT_CONFIG=$dc
+          chmod +x $RENEW_PY
+          $RENEW_PY
+        done
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.deploydir }}
+        path: ${{ env.EXTRA_STR }}/${{ matrix.deploydir }}
+
+  commit:
+    needs: renew
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - uses: actions/download-artifact@v4
+
+    - uses: geekyeggo/delete-artifact@v5
+      with:
+          name: '*'
+
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: renew .config files 
+        commit_author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
