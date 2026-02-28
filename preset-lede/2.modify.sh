@@ -13,6 +13,6 @@ sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root:$1$qepdwqi
 sed -i 's/OpenWrt/514/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i 's/key=password/key=NGzhangjunx7/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
-# 修改 5G WiFi 名称为 514，密码为 NGzhangjunx7
-sed -i 's/ssid=OpenWrt_5G/ssid=514/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+# 修改 5G WiFi 名称为 514-5G，密码为 NGzhangjunx7（关键修改）
+sed -i 's/ssid=OpenWrt_5G/ssid=514-5G/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i 's/key=password/key=NGzhangjunx7/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
