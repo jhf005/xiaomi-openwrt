@@ -23,7 +23,7 @@
   "xiaomi-ac2100": ["2", "ramips", "mt7621", "xiaomi_mi-router-ac2100"],
   "xiaomi-cr6606": ["2", "ramips", "mt7621", "xiaomi_mi-router-cr660x"],
   "xiaomi-cr6608": ["2", "ramips", "mt7621", "xiaomi_mi-router-cr660x"],
-  "xiaomi-cr6609": ["1", "ramips", "mt7621", "xiaomi_mi-router-cr660x"],
+  "xiaomi-cr6609": ["2", "ramips", "mt7621", "xiaomi_mi-router-cr660x"],
   "redmi-ac2100": ["2", "ramips", "mt7621", "xiaomi_redmi-router-ac2100"],
   "youhua-wr1200js": ["1", "ramips", "mt7621", "youhua_wr1200js"],
   "glinet-mt300n-v2": ["1", "ramips", "mt76x8", "glinet_gl-mt300n-v2"],
